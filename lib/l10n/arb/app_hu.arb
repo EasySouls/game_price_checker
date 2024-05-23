@@ -1,0 +1,7 @@
+{
+  "@@locale": "hu",
+  "appName": "GamePriceChecker",
+  "appDescription": "GamePriceChecker - Ellenőrizd az általad kedvelt játékok árát!",
+  "searchPageTitle": "Keresés",
+  "gamesSearchError": "Hiba történt a játékok lekérdezése közben."
+}

@@ -8,11 +8,11 @@ part of 'game.dart';
 
 Game _$GameFromJson(Map<String, dynamic> json) => Game(
       gameID: json['gameID'] as String,
-      steamAppID: json['steamAppID'] as String,
-      cheapest: (json['cheapest'] as num).toDouble(),
+      cheapest: json['cheapest'] as String,
+      name: json['external'] as String,
       cheapestDealID: json['cheapestDealID'] as String,
-      name: json['name'] as String,
-      thumb: json['thumb'] as String,
+      thumb: json['thumb'] as String?,
+      steamAppID: json['steamAppID'] as String?,
     );
 
 Map<String, dynamic> _$GameToJson(Game instance) => <String, dynamic>{
@@ -20,6 +20,6 @@ Map<String, dynamic> _$GameToJson(Game instance) => <String, dynamic>{
       'steamAppID': instance.steamAppID,
       'cheapest': instance.cheapest,
       'cheapestDealID': instance.cheapestDealID,
-      'name': instance.name,
+      'external': instance.name,
       'thumb': instance.thumb,
     };

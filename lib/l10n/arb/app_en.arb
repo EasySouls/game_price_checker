@@ -1,7 +1,7 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    }
+  "@@locale": "en",
+  "appName": "GamePriceChecker",
+  "appDescription": "GamePriceChecker is an application that allows you to compare the prices of video games from different online stores.",
+  "searchPageTitle": "Search Games",
+  "gamesSearchError": "An error occurred while searching for games."
 }

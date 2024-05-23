@@ -14,12 +14,12 @@ class CheapsharkGamesApi extends GamePricesApi {
   final http.Client httpClient;
 
   /// The base url for the Cheapshark API.
-  static const baseUrl = 'www.cheapshark.com/api/1.0';
+  static const baseUrl = 'www.cheapshark.com';
 
   @override
   Future<List<Game>> getGamesByTitle(String title) async {
-    final response =
-        await httpClient.get(Uri.https('$baseUrl/games?title=$title'));
+    final response = await httpClient
+        .get(Uri.https(baseUrl, '/api/1.0/games', {'title': title}));
     if (response.statusCode == 200) {
       final games = json.decode(response.body) as List;
       if (games.isEmpty) {

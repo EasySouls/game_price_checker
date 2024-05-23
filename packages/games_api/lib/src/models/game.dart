@@ -12,38 +12,38 @@ part 'game.g.dart';
 /// [name], and [thumb].
 /// {@endtemplate}
 @immutable
-@JsonSerializable()
+@JsonSerializable(includeIfNull: true)
 class Game extends Equatable {
   /// {@macro game}
-  const Game({
-    required this.gameID,
-    required this.steamAppID,
-    required this.cheapest,
-    required this.cheapestDealID,
-    required this.name,
-    required this.thumb,
-  });
+  const Game(
+      {required this.gameID,
+      required this.cheapest,
+      required this.name,
+      required this.cheapestDealID,
+      this.thumb,
+      this.steamAppID});
+
+  /// Deserializes the given [JsonMap] into a [Game]
+  factory Game.fromJson(JsonMap json) => _$GameFromJson(json);
 
   /// The unique identifier of the `game`
   final String gameID;
 
   /// The unique identifier of the `game` on the Steam store
-  final String steamAppID;
+  final String? steamAppID;
 
   /// The current cheapest price of the `game`
-  final double cheapest;
+  final String cheapest;
 
   /// The unique id of the deal that is currently the cheapest
   final String cheapestDealID;
 
   /// The name of the `game`
+  @JsonKey(name: 'external')
   final String name;
 
   /// The uri of the `game`'s thumbnail
-  final String thumb;
-
-  /// Deserializes the given [JsonMap] into a [Game]
-  static Game fromJson(JsonMap json) => _$GameFromJson(json);
+  final String? thumb;
 
   /// Converts this [Game] into a [JsonMap]
   JsonMap toJson() => _$GameToJson(this);
@@ -51,10 +51,8 @@ class Game extends Equatable {
   @override
   List<Object> get props => [
         gameID,
-        steamAppID,
         cheapest,
         cheapestDealID,
         name,
-        thumb,
       ];
 }
