@@ -45,15 +45,6 @@ class SearchResultsView extends StatelessWidget {
                 ),
               );
           }
-          if (state is GamesSearchLoadSuccess) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                const SnackBar(
-                  content: Text('Games found'),
-                ),
-              );
-          }
         },
         builder: (context, state) {
           if (state is GamesSearchLoadFailure) {

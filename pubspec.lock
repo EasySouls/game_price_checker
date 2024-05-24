@@ -120,7 +120,7 @@ packages:
     source: hosted
     version: "5.11.6"
   firebase_core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: firebase_core
       sha256: "4b5100e2dbc3fe72c2d4241a046d3f01457fe11293283a324f5c52575e3406f8"
@@ -179,6 +179,29 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      sha256: "275ff26905134bcb59417cf60ad979136f1f8257f2f449914b2c3e05bbb4cd6f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.7.0"
+  form_inputs:
+    dependency: "direct main"
+    description:
+      path: "packages/form_inputs"
+      relative: true
+    source: path
+    version: "0.1.0+1"
+  formz:
+    dependency: "direct main"
+    description:
+      name: formz
+      sha256: a58eb48d84685b7ffafac1d143bf47d585bf54c7db89fe81c175dfd6e53201c7
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.0"
   games_api:
     dependency: "direct main"
     description:

@@ -13,11 +13,16 @@ dependencies:
   cheapshark_games_api:
     path: packages/cheapshark_games_api
   equatable: ^2.0.5
+  firebase_core: ^2.31.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
   flutter_localizations:
     sdk: flutter
+  font_awesome_flutter: ^10.7.0
+  form_inputs:
+    path: packages/form_inputs
+  formz: ^0.7.0
   games_api:
     path: packages/games_api
   games_repository:

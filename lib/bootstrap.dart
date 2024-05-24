@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:game_price_checker/app/app.dart';
+import 'package:game_price_checker/firebase_options.dart';
 import 'package:games_api/game_prices_api.dart';
 import 'package:games_repository/games_repository.dart';
 
@@ -28,16 +31,29 @@ Future<void> bootstrap({required GamePricesApi gamePricesApi}) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
+  WidgetsFlutterBinding.ensureInitialized();
+
   Bloc.observer = const AppBlocObserver();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   final gamesRepository = GamesRepository(
     gamePricesApi: gamePricesApi,
   );
 
+  final authenticationRepository = AuthenticationRepository();
+  await authenticationRepository.user.first;
+
   runZonedGuarded(
     () => {
-      WidgetsFlutterBinding.ensureInitialized(),
-      runApp(App(gamesRepository: gamesRepository))
+      runApp(
+        App(
+          gamesRepository: gamesRepository,
+          authenticationRepository: authenticationRepository,
+        ),
+      ),
     },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );

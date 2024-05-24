@@ -1,3 +1,4 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -7,14 +8,22 @@ import 'package:game_price_checker/theme/theme.dart';
 import 'package:games_repository/games_repository.dart';
 
 class App extends StatelessWidget {
-  const App({required this.gamesRepository, super.key});
+  const App({
+    required this.gamesRepository,
+    required this.authenticationRepository,
+    super.key,
+  });
 
   final GamesRepository gamesRepository;
+  final AuthenticationRepository authenticationRepository;
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: gamesRepository,
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(value: authenticationRepository),
+        RepositoryProvider.value(value: gamesRepository),
+      ],
       child: const AppView(),
     );
   }
