@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game_price_checker/favourites/favourites.dart';
+import 'package:game_price_checker/games/favourites/favourites.dart';
+import 'package:game_price_checker/games/search/bloc/games_search_bloc.dart';
+import 'package:game_price_checker/games/search/search.dart';
 import 'package:game_price_checker/home/cubit/home_cubit.dart';
-import 'package:game_price_checker/search/search.dart';
+import 'package:games_repository/games_repository.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -24,9 +26,14 @@ class HomeView extends StatelessWidget {
     final selectedTab = context.select((HomeCubit cubit) => cubit.state.tab);
 
     return Scaffold(
-      body: IndexedStack(
-        index: selectedTab.index,
-        children: const [SearchPage(), FavouritesPage()],
+      body: BlocProvider(
+        create: (context) => GamesSearchBloc(
+          gamesRepository: context.read<GamesRepository>(),
+        ),
+        child: IndexedStack(
+          index: selectedTab.index,
+          children: const [SearchPage(), FavouritesPage(), SearchResultsPage()],
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),

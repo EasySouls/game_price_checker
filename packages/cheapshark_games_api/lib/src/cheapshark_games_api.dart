@@ -28,6 +28,12 @@ class CheapsharkGamesApi extends GamePricesApi {
 
       return games.map((dynamic json) {
         final map = json as JsonMap;
+        if (map.isEmpty) {
+          throw GamePricesApiException(
+            message: 'Failed to get games by title',
+            statusCode: response.statusCode,
+          );
+        }
         return Game.fromJson(map);
       }).toList();
     }

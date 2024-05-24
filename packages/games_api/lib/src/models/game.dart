@@ -12,16 +12,17 @@ part 'game.g.dart';
 /// [name], and [thumb].
 /// {@endtemplate}
 @immutable
-@JsonSerializable(includeIfNull: true)
+@JsonSerializable()
 class Game extends Equatable {
   /// {@macro game}
-  const Game(
-      {required this.gameID,
-      required this.cheapest,
-      required this.name,
-      required this.cheapestDealID,
-      this.thumb,
-      this.steamAppID});
+  const Game({
+    required this.gameID,
+    required this.cheapest,
+    required this.name,
+    required this.cheapestDealID,
+    this.thumb,
+    this.steamAppID,
+  });
 
   /// Deserializes the given [JsonMap] into a [Game]
   factory Game.fromJson(JsonMap json) => _$GameFromJson(json);

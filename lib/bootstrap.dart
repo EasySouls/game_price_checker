@@ -35,7 +35,10 @@ Future<void> bootstrap({required GamePricesApi gamePricesApi}) async {
   );
 
   runZonedGuarded(
-    () => runApp(App(gamesRepository: gamesRepository)),
+    () => {
+      WidgetsFlutterBinding.ensureInitialized(),
+      runApp(App(gamesRepository: gamesRepository))
+    },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
