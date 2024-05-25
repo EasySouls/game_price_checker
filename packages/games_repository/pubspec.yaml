@@ -8,6 +8,8 @@ environment:
   flutter: '^3.19.0'
 
 dependencies:
+  firestore_favorites_api:
+    path: ../firestore_favorites_api
   flutter:
     sdk: flutter
   games_api:

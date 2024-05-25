@@ -9,6 +9,9 @@ abstract class GamePricesApi {
 
   /// Fetches a list of [Game]s by the given [title].
   Future<List<Game>> getGamesByTitle(String title);
+
+  /// Fetches a [Game] by the given [id].
+  Future<Game> getGameById(String id);
 }
 
 /// Error thrown when an error occurs in the [GamePricesApi].

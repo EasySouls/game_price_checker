@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_price_checker/games/search/bloc/games_search_bloc.dart';
+import 'package:game_price_checker/games/search/widgets/game_list.dart';
+import 'package:game_price_checker/home/cubit/home_cubit.dart';
 import 'package:games_repository/games_repository.dart';
 
 class SearchResultsPage extends StatelessWidget {
@@ -59,6 +61,21 @@ class SearchResultsView extends StatelessWidget {
                 Expanded(
                   child: _searchResults(games: state.games),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      textStyle: const TextStyle(
+                        color: Colors.black38,
+                      ),
+                    ),
+                    onPressed: () {
+                      context.read<HomeCubit>().setTab(HomeTab.favourites);
+                    },
+                    child: const Text('See Favorites'),
+                  ),
+                ),
               ],
             );
           }
@@ -69,15 +86,6 @@ class SearchResultsView extends StatelessWidget {
   }
 
   Widget _searchResults({required List<Game> games}) {
-    return ListView.builder(
-      itemCount: games.length,
-      itemBuilder: (context, index) {
-        final game = games[index];
-        return ListTile(
-          title: Text(game.name),
-          subtitle: Text(game.cheapest),
-        );
-      },
-    );
+    return GameList(games: games);
   }
 }

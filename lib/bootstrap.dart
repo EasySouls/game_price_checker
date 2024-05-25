@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firestore_favorites_api/firestore_favorites_api.dart';
 import 'package:flutter/widgets.dart';
 import 'package:game_price_checker/app/app.dart';
 import 'package:game_price_checker/firebase_options.dart';
@@ -39,8 +40,11 @@ Future<void> bootstrap({required GamePricesApi gamePricesApi}) async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  final firestoreFavoritesApi = FirestoreFavoritesApi();
+
   final gamesRepository = GamesRepository(
     gamePricesApi: gamePricesApi,
+    firestoreFavoritesApi: firestoreFavoritesApi,
   );
 
   final authenticationRepository = AuthenticationRepository();

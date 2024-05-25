@@ -1,0 +1,17 @@
+name: firestore_favorites_api
+description: Save and retrieve favorited games with the help of Firebase Firestore
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: '^3.3.0'
+  flutter: '^3.19.0'
+
+dependencies:
+  cloud_firestore: ^4.17.4
+  firebase_core: ^2.31.1
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  very_good_analysis: ^5.1.0

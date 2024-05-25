@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:game_price_checker/games/search/widgets/game_list_tile.dart';
+import 'package:game_price_checker/games/search/widgets/game_tile.dart';
 import 'package:games_repository/games_repository.dart';
 
 class GameList extends StatelessWidget {
@@ -22,7 +22,7 @@ class GameList extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 8),
           height: 50,
           color: Colors.red,
-          child: GameListTile(
+          child: GameTile(
             game: game,
             onToggleFavorite: () {
               // if (game.isFavorite) {
