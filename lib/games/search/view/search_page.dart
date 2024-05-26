@@ -58,30 +58,30 @@ class _SearchViewState extends State<SearchView> {
           child: Column(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: MediaQuery.sizeOf(context).height * 0.1,
               ),
               Text(
                 l10n.searchPageTitle,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 76,
+                  fontSize: 50,
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
+                height: MediaQuery.sizeOf(context).height * 0.1,
               ),
               SearchForm(
                 onSearch: _onSearch,
                 controller: _controller,
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.2,
+                height: MediaQuery.sizeOf(context).height * 0.2,
               ),
               MaterialButton(
-                minWidth: MediaQuery.of(context).size.width * 0.4,
+                minWidth: MediaQuery.sizeOf(context).width * 0.4,
                 color: Colors.tealAccent,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
                 onPressed: () {
                   _onSearch(context, _controller.text);
                 },
@@ -98,10 +98,10 @@ class _SearchViewState extends State<SearchView> {
                 height: 24,
               ),
               MaterialButton(
-                minWidth: MediaQuery.of(context).size.width * 0.4,
+                minWidth: MediaQuery.sizeOf(context).width * 0.4,
                 color: Colors.white,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
                 onPressed: () {
                   context.read<HomeCubit>().setTab(HomeTab.favourites);
                 },
@@ -120,7 +120,7 @@ class _SearchViewState extends State<SearchView> {
               BlocBuilder<AppBloc, AppState>(
                 builder: (context, state) {
                   return MaterialButton(
-                    minWidth: MediaQuery.of(context).size.width * 0.4,
+                    minWidth: MediaQuery.sizeOf(context).width * 0.4,
                     color: Colors.tealAccent,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 40,

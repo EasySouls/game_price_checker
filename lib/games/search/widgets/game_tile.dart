@@ -34,7 +34,11 @@ class GameTile extends StatelessWidget {
             children: [
               Text(
                 game.name,
-                style: const TextStyle(color: Colors.white, fontSize: 18),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               Text(
                 '\$${game.cheapest}',
