@@ -24,7 +24,7 @@ class GamesRepository {
   /// Fetches a [List] of favorited [Game]s by the given [userId].
   Future<List<Game>> getFavorites(String userId) async {
     final favorites = await _firestoreFavoritesApi.getFavorites(userId);
-    const games = <Game>[];
+    final List<Game> games = [];
     for (final favorite in favorites) {
       final game = await _gamePricesApi.getGameById(favorite);
       games.add(game);

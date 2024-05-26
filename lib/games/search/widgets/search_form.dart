@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:game_price_checker/l10n/l10n.dart';
 
 class SearchForm extends StatelessWidget {
   const SearchForm({
@@ -8,15 +9,14 @@ class SearchForm extends StatelessWidget {
   });
 
   final void Function(BuildContext, String) onSearch;
-  final TextEditingController controller;
+  final SearchController controller;
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      decoration: const InputDecoration(
-        hintText: 'Search for a game title',
-        border: OutlineInputBorder(),
-      ),
+    final l10n = context.l10n;
+
+    return SearchBar(
+      hintText: l10n.searchHint,
       controller: controller,
       onSubmitted: (value) => onSearch(context, controller.text),
     );

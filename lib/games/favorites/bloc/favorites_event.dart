@@ -25,4 +25,13 @@ class RemoveFavorite extends FavoritesEvent {
   List<Object> get props => [game];
 }
 
-class LoadFavorites extends FavoritesEvent {}
+enum PriceOrder { ascending, descending }
+
+class LoadFavorites extends FavoritesEvent {
+  const LoadFavorites(this.priceOrder);
+
+  final PriceOrder priceOrder;
+
+  @override
+  List<Object> get props => [priceOrder];
+}

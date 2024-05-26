@@ -19,8 +19,6 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   final GamesRepository gamesRepository;
   final AuthenticationRepository authenticationRepository;
 
-  // TODO(1): Implement sorting the favorites by price
-
   Future<void> _onLoadFavorites(
     LoadFavorites event,
     Emitter<FavoritesState> emit,
@@ -29,12 +27,17 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
     try {
       final userId = authenticationRepository.currentUser.id;
       if (userId.isEmpty) {
-        emit(const FavoritesError(message: 'User not authenticated'));
+        emit(const FavoritesError(message: 'Log in to favorite games'));
         return;
       }
 
       final favorites = await gamesRepository.getFavorites(userId);
-      emit(FavoritesLoaded(favorites: favorites));
+      if (event.priceOrder == PriceOrder.ascending) {
+        favorites.sort((a, b) => a.cheapest.compareTo(b.cheapest));
+      } else {
+        favorites.sort((a, b) => b.cheapest.compareTo(a.cheapest));
+      }
+      emit(FavoritesLoaded(favorites: favorites, priceOrder: event.priceOrder));
     } catch (e) {
       emit(FavoritesError(message: e.toString()));
     }
@@ -54,7 +57,12 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
 
       await gamesRepository.addFavorite(userId, event.game);
       final favorites = await gamesRepository.getFavorites(userId);
-      emit(FavoritesLoaded(favorites: favorites));
+      emit(
+        FavoritesLoaded(
+          favorites: favorites,
+          priceOrder: PriceOrder.ascending,
+        ),
+      );
     } catch (e) {
       emit(FavoritesError(message: e.toString()));
     }
@@ -74,7 +82,12 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
 
       await gamesRepository.removeFavorite(userId, event.game);
       final favorites = await gamesRepository.getFavorites(userId);
-      emit(FavoritesLoaded(favorites: favorites));
+      emit(
+        FavoritesLoaded(
+          favorites: favorites,
+          priceOrder: PriceOrder.ascending,
+        ),
+      );
     } catch (e) {
       emit(FavoritesError(message: e.toString()));
     }

@@ -23,7 +23,7 @@ class GamesSearchBloc extends Bloc<GamesSearchEvent, GamesSearchState> {
 
     try {
       final games = await gamesRepository.getGames(title: event.query);
-      emit(GamesSearchLoadSuccess(games: games));
+      emit(GamesSearchLoadSuccess(games: games, query: event.query));
     } catch (e) {
       emit(const GamesSearchLoadFailure());
     }

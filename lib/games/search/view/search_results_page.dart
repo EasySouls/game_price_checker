@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:game_price_checker/games/search/bloc/games_search_bloc.dart';
 import 'package:game_price_checker/games/search/widgets/game_list.dart';
 import 'package:game_price_checker/home/cubit/home_cubit.dart';
+import 'package:game_price_checker/l10n/l10n.dart';
 import 'package:games_repository/games_repository.dart';
 
 class SearchResultsPage extends StatelessWidget {
@@ -23,18 +24,17 @@ class SearchResultsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Search results'),
-      ),
       body: BlocConsumer<GamesSearchBloc, GamesSearchState>(
         listener: (context, state) {
           if (state is GamesSearchLoadFailure) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
-                const SnackBar(
-                  content: Text('Failed to load games'),
+                SnackBar(
+                  content: Text(l10n.gamesSearchError),
                 ),
               );
           }
@@ -42,8 +42,8 @@ class SearchResultsView extends StatelessWidget {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(
-                const SnackBar(
-                  content: Text('No games found'),
+                SnackBar(
+                  content: Text(l10n.gamesSearchNoResults),
                 ),
               );
           }
@@ -57,23 +57,51 @@ class SearchResultsView extends StatelessWidget {
           if (state is GamesSearchLoadSuccess) {
             return Column(
               children: [
-                const Text('Results for query'),
-                Expanded(
-                  child: _searchResults(games: state.games),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.04,
                 ),
+                Text(
+                  l10n.searchResultsTitle,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 42,
+                  ),
+                ),
+                Text(
+                  state.query,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.tealAccent,
+                    fontSize: 42,
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: _searchResults(games: state.games),
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                 Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.teal,
-                      textStyle: const TextStyle(
-                        color: Colors.black38,
-                      ),
+                  padding: const EdgeInsets.only(bottom: 40),
+                  child: MaterialButton(
+                    minWidth: MediaQuery.of(context).size.width * 0.4,
+                    color: Colors.tealAccent,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40,
+                      vertical: 20,
                     ),
                     onPressed: () {
                       context.read<HomeCubit>().setTab(HomeTab.favourites);
                     },
-                    child: const Text('See Favorites'),
+                    child: Text(
+                      l10n.seeFavorites,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ],

@@ -2,6 +2,21 @@
   "@@locale": "hu",
   "appName": "GamePriceChecker",
   "appDescription": "GamePriceChecker - Ellenőrizd az általad kedvelt játékok árát!",
-  "searchPageTitle": "Keresés",
-  "gamesSearchError": "Hiba történt a játékok lekérdezése közben."
+  "searchPageTitle": "Keress egy játék címére!",
+  "gamesSearchError": "Hiba történt a játékok lekérdezése közben.",
+  "searchHint": "KERESÉS...",
+  "gamesSearchNoResults": "Nincs találat.",
+  "searchResultsTitle": "Keresési eredmények: ",
+  "letsSearch": "Keresés",
+  "seeFavorites": "Kedvencek",
+  "login": "Bejelentkezés",
+  "logout": "Kijelentkezés",
+  "password": "Jelszó",
+  "createAccount": "Regisztráció",
+  "signInWithGoogle": "Bejelentkezés Google-fiókkal",
+  "backToSearch": "Vissza a kereséshez",
+  "favorites": "Kedvenc játékok",
+  "highToLow": "Legdrágább",
+  "lowToHigh": "Legolcsóbb",
+  "noFavorites": "Még nem kedveltél egy játékot sem."
 }

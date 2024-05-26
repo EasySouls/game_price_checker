@@ -1,11 +1,13 @@
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:game_price_checker/games/favourites/bloc/favorites_bloc.dart';
-import 'package:game_price_checker/games/favourites/favourites.dart';
+import 'package:game_price_checker/games/favorites/bloc/favorites_bloc.dart';
+import 'package:game_price_checker/games/favorites/favorites.dart';
 import 'package:game_price_checker/games/search/bloc/games_search_bloc.dart';
 import 'package:game_price_checker/games/search/search.dart';
 import 'package:game_price_checker/home/cubit/home_cubit.dart';
+import 'package:game_price_checker/login/login.dart';
+import 'package:game_price_checker/sign_up/sign_up.dart';
 import 'package:games_repository/games_repository.dart';
 
 class HomePage extends StatelessWidget {
@@ -35,7 +37,7 @@ class HomeView extends StatelessWidget {
               gamesRepository: context.read<GamesRepository>(),
               authenticationRepository:
                   context.read<AuthenticationRepository>(),
-            )..add(LoadFavorites()),
+            ),
           ),
           BlocProvider(
             create: (context) => GamesSearchBloc(
@@ -45,7 +47,13 @@ class HomeView extends StatelessWidget {
         ],
         child: IndexedStack(
           index: selectedTab.index,
-          children: const [SearchPage(), FavouritesPage(), SearchResultsPage()],
+          children: const [
+            SearchPage(),
+            FavouritesPage(),
+            SearchResultsPage(),
+            LoginPage(),
+            SignUpPage(),
+          ],
         ),
       ),
       bottomNavigationBar: BottomAppBar(

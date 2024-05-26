@@ -2,6 +2,21 @@
   "@@locale": "en",
   "appName": "GamePriceChecker",
   "appDescription": "GamePriceChecker is an application that allows you to compare the prices of video games from different online stores.",
-  "searchPageTitle": "Search Games",
-  "gamesSearchError": "An error occurred while searching for games."
+  "searchPageTitle": "Search for a game title",
+  "gamesSearchError": "An error occurred while searching for games.",
+  "searchHint": "SEARCH...",
+  "gamesSearchNoResults": "No games found.",
+  "searchResultsTitle": "Results for ",
+  "letsSearch": "Let's search",
+  "seeFavorites": "See favorites",
+  "login": "Login",
+  "logout": "Logout",
+  "password": "Password",
+  "createAccount": "Create account",
+  "signInWithGoogle": "Sign in with Google",
+  "backToSearch": "Go back to search",
+  "favorites": "Favorite games",
+  "highToLow": "Highest price",
+  "lowToHigh": "Lowest price",
+  "noFavorites": "You don't have any favorite games yet."
 }

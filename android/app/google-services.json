@@ -12,7 +12,12 @@
           "package_name": "com.example.verygoodcore.game_price_checker"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "281068618625-c91cr8tmsrbg7ish05t7akd5tdi7tahm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCnh43zS2-6JuH7x8F8b8hQsXCNK5aPvl0"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281068618625-c91cr8tmsrbg7ish05t7akd5tdi7tahm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

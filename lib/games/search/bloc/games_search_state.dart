@@ -17,10 +17,12 @@ final class GamesSearchLoadInProgress extends GamesSearchState {
 
 final class GamesSearchLoadSuccess extends GamesSearchState {
   const GamesSearchLoadSuccess({
+    required this.query,
     required this.games,
   });
 
   final List<Game> games;
+  final String query;
 
   @override
   List<Object> get props => [games];

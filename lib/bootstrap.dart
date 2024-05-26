@@ -32,32 +32,32 @@ Future<void> bootstrap({required GamePricesApi gamePricesApi}) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-  WidgetsFlutterBinding.ensureInitialized();
+  await runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
 
-  Bloc.observer = const AppBlocObserver();
+      Bloc.observer = const AppBlocObserver();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
 
-  final firestoreFavoritesApi = FirestoreFavoritesApi();
+      final firestoreFavoritesApi = FirestoreFavoritesApi();
 
-  final gamesRepository = GamesRepository(
-    gamePricesApi: gamePricesApi,
-    firestoreFavoritesApi: firestoreFavoritesApi,
-  );
+      final gamesRepository = GamesRepository(
+        gamePricesApi: gamePricesApi,
+        firestoreFavoritesApi: firestoreFavoritesApi,
+      );
 
-  final authenticationRepository = AuthenticationRepository();
-  await authenticationRepository.user.first;
+      final authenticationRepository = AuthenticationRepository();
+      await authenticationRepository.user.first;
 
-  runZonedGuarded(
-    () => {
       runApp(
         App(
           gamesRepository: gamesRepository,
           authenticationRepository: authenticationRepository,
         ),
-      ),
+      );
     },
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );

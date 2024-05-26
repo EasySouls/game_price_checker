@@ -10,7 +10,8 @@ GameWithDeals _$GameWithDealsFromJson(Map<String, dynamic> json) =>
     GameWithDeals(
       info: Info.fromJson(json['info'] as Map<String, dynamic>),
       cheapestPriceEver: CheapestPriceEver.fromJson(
-          json['cheapestPriceEver'] as Map<String, dynamic>),
+        json['cheapestPriceEver'] as Map<String, dynamic>,
+      ),
       deals: (json['deals'] as List<dynamic>)
           .map((e) => Deal.fromJson(e as Map<String, dynamic>))
           .toList(),

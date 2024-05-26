@@ -1,5 +1,7 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_price_checker/app/bloc/app_bloc.dart';
 import 'package:game_price_checker/games/search/bloc/games_search_bloc.dart';
 import 'package:game_price_checker/games/search/widgets/widgets.dart';
 import 'package:game_price_checker/home/cubit/home_cubit.dart';
@@ -23,16 +25,20 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   void _onSearch(BuildContext context, String query) {
+    if (query.isEmpty) {
+      return;
+    }
     context.read<HomeCubit>().setTab(HomeTab.results);
     context.read<GamesSearchBloc>().add(GameSearchQuerySubmitted(query));
+    _controller.clear();
   }
 
-  late final TextEditingController _controller;
+  late final SearchController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    _controller = SearchController();
   }
 
   @override
@@ -46,32 +52,97 @@ class _SearchViewState extends State<SearchView> {
     final l10n = context.l10n;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.searchPageTitle),
-      ),
       body: Container(
         padding: const EdgeInsets.all(16),
         child: Center(
           child: Column(
             children: [
-              const Text('Search for a game title'),
-              const SizedBox(height: 8),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+              ),
+              Text(
+                l10n.searchPageTitle,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 76,
+                ),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+              ),
               SearchForm(
                 onSearch: _onSearch,
                 controller: _controller,
               ),
-              const SizedBox(height: 16),
-              ElevatedButton(
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.2,
+              ),
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width * 0.4,
+                color: Colors.tealAccent,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
                 onPressed: () {
                   _onSearch(context, _controller.text);
                 },
-                child: const Text("Let's search!"),
+                child: Text(
+                  l10n.letsSearch,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
-              ElevatedButton(
+              const SizedBox(
+                height: 24,
+              ),
+              MaterialButton(
+                minWidth: MediaQuery.of(context).size.width * 0.4,
+                color: Colors.white,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                 onPressed: () {
                   context.read<HomeCubit>().setTab(HomeTab.favourites);
                 },
-                child: const Text('See favorites'),
+                child: Text(
+                  l10n.seeFavorites,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              BlocBuilder<AppBloc, AppState>(
+                builder: (context, state) {
+                  return MaterialButton(
+                    minWidth: MediaQuery.of(context).size.width * 0.4,
+                    color: Colors.tealAccent,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40,
+                      vertical: 20,
+                    ),
+                    onPressed: () {
+                      if (state.user != User.empty) {
+                        context.read<AppBloc>().add(const AppLogoutRequested());
+                      } else {
+                        context.read<HomeCubit>().setTab(HomeTab.login);
+                      }
+                    },
+                    child: Text(
+                      state.user != User.empty ? l10n.logout : l10n.login,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),
