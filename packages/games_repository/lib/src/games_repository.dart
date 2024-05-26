@@ -31,4 +31,15 @@ class GamesRepository {
     }
     return games;
   }
+
+  /// Adds a [Game] to the favorites of the given [userId].
+  Future<void> addFavorite(String userId, Game game) async {
+    await _firestoreFavoritesApi.saveFavorite(userId, game.gameID);
+  }
+
+  /// Removes a [Game] from the favorites of the given [userId].
+  /// If the [Game] is not in the favorites, nothing happens.
+  Future<void> removeFavorite(String userId, Game game) async {
+    await _firestoreFavoritesApi.removeFavorite(userId, game.gameID);
+  }
 }

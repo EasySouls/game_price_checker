@@ -50,7 +50,7 @@ class GameWithDeals extends Equatable {
 @JsonSerializable()
 class Info extends Equatable {
   /// {@macro info}
-  Info({
+  const Info({
     required this.title,
     required this.thumb,
     this.steamAppID,
@@ -105,7 +105,8 @@ class CheapestPriceEver extends Equatable {
 }
 
 /// {@template deal}
-/// Contains the current price of the game, the retail price, and the amount saved.
+/// Contains the current price of the game, the retail price,
+/// and the amount saved.
 /// {@endtemplate}
 @immutable
 @JsonSerializable()

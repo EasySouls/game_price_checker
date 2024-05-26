@@ -1,5 +1,7 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:game_price_checker/games/favourites/bloc/favorites_bloc.dart';
 import 'package:game_price_checker/games/favourites/favourites.dart';
 import 'package:game_price_checker/games/search/bloc/games_search_bloc.dart';
 import 'package:game_price_checker/games/search/search.dart';
@@ -26,10 +28,21 @@ class HomeView extends StatelessWidget {
     final selectedTab = context.select((HomeCubit cubit) => cubit.state.tab);
 
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => GamesSearchBloc(
-          gamesRepository: context.read<GamesRepository>(),
-        ),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => FavoritesBloc(
+              gamesRepository: context.read<GamesRepository>(),
+              authenticationRepository:
+                  context.read<AuthenticationRepository>(),
+            )..add(LoadFavorites()),
+          ),
+          BlocProvider(
+            create: (context) => GamesSearchBloc(
+              gamesRepository: context.read<GamesRepository>(),
+            ),
+          ),
+        ],
         child: IndexedStack(
           index: selectedTab.index,
           children: const [SearchPage(), FavouritesPage(), SearchResultsPage()],
