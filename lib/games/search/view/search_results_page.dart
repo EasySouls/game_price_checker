@@ -28,6 +28,7 @@ class SearchResultsView extends StatelessWidget {
 
     return Scaffold(
       body: BlocConsumer<GamesSearchBloc, GamesSearchState>(
+        listenWhen: (previous, current) => previous != current,
         listener: (context, state) {
           if (state is GamesSearchLoadFailure) {
             ScaffoldMessenger.of(context)
@@ -55,56 +56,62 @@ class SearchResultsView extends StatelessWidget {
             );
           }
           if (state is GamesSearchLoadSuccess) {
-            return Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.04,
-                ),
-                Text(
-                  l10n.searchResultsTitle,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 42,
-                  ),
-                ),
-                Text(
-                  state.query,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.tealAccent,
-                    fontSize: 42,
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: _searchResults(games: state.games),
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 40),
-                  child: MaterialButton(
-                    minWidth: MediaQuery.of(context).size.width * 0.4,
-                    color: Colors.tealAccent,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 40,
-                      vertical: 20,
+            return SafeArea(
+              child: ColoredBox(
+                color: Theme.of(context).colorScheme.surface,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.04,
                     ),
-                    onPressed: () {
-                      context.read<HomeCubit>().setTab(HomeTab.favourites);
-                    },
-                    child: Text(
-                      l10n.seeFavorites,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 24,
+                    Text(
+                      l10n.searchResultsTitle,
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize: 42,
                       ),
                     ),
-                  ),
+                    Text(
+                      state.query,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 42,
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
+                        child: _searchResults(games: state.games),
+                      ),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 40),
+                      child: MaterialButton(
+                        minWidth: MediaQuery.of(context).size.width * 0.4,
+                        color: Colors.tealAccent,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40,
+                          vertical: 20,
+                        ),
+                        onPressed: () {
+                          context.read<HomeCubit>().setTab(HomeTab.favourites);
+                        },
+                        child: Text(
+                          l10n.seeFavorites,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             );
           }
           return const SizedBox.shrink();

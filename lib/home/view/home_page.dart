@@ -57,6 +57,7 @@ class HomeView extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.grey[800],
         shape: const CircularNotchedRectangle(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -95,8 +96,9 @@ class _HomeTabButton extends StatelessWidget {
       onPressed: () => context.read<HomeCubit>().setTab(value),
       iconSize: 24,
       icon: icon,
-      color:
-          groupValue == value ? null : Theme.of(context).colorScheme.secondary,
+      color: groupValue == value
+          ? Theme.of(context).colorScheme.primary
+          : Theme.of(context).colorScheme.secondary,
     );
   }
 }

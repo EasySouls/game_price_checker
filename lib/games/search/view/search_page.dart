@@ -53,6 +53,7 @@ class _SearchViewState extends State<SearchView> {
 
     return Scaffold(
       body: Container(
+        color: Theme.of(context).colorScheme.surface,
         padding: const EdgeInsets.all(16),
         child: Center(
           child: Column(
@@ -62,10 +63,12 @@ class _SearchViewState extends State<SearchView> {
               ),
               Text(
                 l10n.searchPageTitle,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
+                textAlign: TextAlign.center,
               ),
               SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.1,

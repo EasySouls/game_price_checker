@@ -7,6 +7,8 @@ class FlutterGamePricesTheme {
       colorScheme: ColorScheme.fromSeed(
         seedColor: const Color(0xFF13B9FF),
         primary: Colors.tealAccent,
+        secondary: Colors.white,
+        surface: Colors.grey[900],
       ),
       snackBarTheme:
           const SnackBarThemeData(behavior: SnackBarBehavior.floating),
@@ -22,6 +24,8 @@ class FlutterGamePricesTheme {
         brightness: Brightness.dark,
         seedColor: const Color(0xFF13B9FF),
         primary: Colors.tealAccent,
+        secondary: Colors.white,
+        surface: Colors.grey[900],
       ),
       snackBarTheme: const SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
