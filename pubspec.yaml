@@ -18,7 +18,7 @@ dependencies:
     path: packages/firestore_favorites_api
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
   flutter_localizations:
     sdk: flutter
   font_awesome_flutter: ^10.7.0
