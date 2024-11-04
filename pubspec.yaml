@@ -21,7 +21,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_localizations:
     sdk: flutter
-  font_awesome_flutter: ^10.7.0
+  font_awesome_flutter: ^10.8.0
   form_inputs:
     path: packages/form_inputs
   formz: ^0.7.0
