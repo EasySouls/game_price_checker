@@ -12,7 +12,7 @@ dependencies:
   bloc: ^9.0.0
   cheapshark_games_api:
     path: packages/cheapshark_games_api
-  equatable: ^2.0.5
+  equatable: ^2.0.7
   firebase_core: ^2.32.0
   firestore_favorites_api:
     path: packages/firestore_favorites_api
